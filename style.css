@@ -1,6 +1,6 @@
 /* =========================================================
    EMPRESA HOGAR - SISTEMA DE VENTAS
-   STYLE.CSS COMPLETO
+   STYLE.CSS COMPLETO Y CORREGIDO
    ========================================================= */
 
 * {
@@ -534,8 +534,6 @@ button {
   gap: 14px;
 }
 
-
-/* TARJETA COMPLETA */
 .product {
   background: #fff;
   border: 1px solid #dfe8f0;
@@ -557,8 +555,6 @@ button {
 
 /* =========================================================
    IMAGEN DEL PRODUCTO
-   IMPORTANTE:
-   AQUÍ SOLO VA LA IMAGEN.
    ========================================================= */
 
 .product-img {
@@ -577,8 +573,6 @@ button {
   margin-bottom: 10px;
 }
 
-
-/* FOTO REAL */
 .product-img img {
   width: 100%;
   height: 100%;
@@ -591,7 +585,6 @@ button {
 
 /* =========================================================
    NOMBRE DEL PRODUCTO
-   SIEMPRE DEBAJO DE LA IMAGEN
    ========================================================= */
 
 .product h3 {
@@ -753,7 +746,10 @@ footer {
 }
 
 
-/* FILA DEL CARRITO */
+/* =========================================================
+   FILA DEL CARRITO
+   ========================================================= */
+
 .cart-row {
   display: grid;
 
@@ -772,8 +768,6 @@ footer {
   margin-bottom: 7px;
 }
 
-
-/* IMAGEN DEL CARRITO */
 .cart-img {
   width: 55px;
   height: 55px;
@@ -828,7 +822,9 @@ footer {
 }
 
 
-/* CARRITO VACÍO */
+/* =========================================================
+   CARRITO VACÍO
+   ========================================================= */
 
 .cart-empty {
   text-align: center;
@@ -852,7 +848,9 @@ footer {
 }
 
 
-/* RESUMEN */
+/* =========================================================
+   RESUMEN DEL CARRITO
+   ========================================================= */
 
 .summary {
   margin-top: auto;
@@ -960,42 +958,196 @@ footer {
   color: #71839a;
 }
 
-.purchase {
+
+/* =========================================================
+   PAGOS
+   VENTANA ANCHA Y HORIZONTAL
+   ========================================================= */
+
+.payment-card {
+  width: 900px;
+  max-width: 95vw;
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  position: relative;
+
   display: grid;
 
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 1fr;
 
-  gap: 10px;
+  grid-template-areas:
+    "title title"
+    "description description"
+    "customer options"
+    "customer info"
+    "total total"
+    "button button";
+
+  gap: 0 20px;
 
   text-align: left;
 
-  background: #f5f8fb;
-
-  padding: 13px;
-
-  border-radius: 8px;
-
-  margin: 18px 0;
-}
-
-.purchase b {
-  text-align: right;
+  padding: 25px;
 }
 
 
 /* =========================================================
-   PAGOS
+   TÍTULO DEL PAGO
    ========================================================= */
 
-.payment-card {
-  max-height: 92vh;
-  overflow: auto;
+.payment-card > h2 {
+  grid-area: title;
+
+  margin: 0 0 3px;
+
+  font-size: 24px;
+
+  color: #12345a;
 }
 
-.payment-options {
-  display: grid;
+.payment-card > p {
+  grid-area: description;
+
+  margin: 0 0 15px;
+
+  color: #71839a;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR DEL PAGO
+   ========================================================= */
+
+.payment-card .modal-x {
+  position: absolute;
+
+  right: 12px;
+
+  top: 8px;
+
+  background: transparent;
+
+  font-size: 28px;
+
+  color: #203c56;
+
+  z-index: 5;
+}
+
+
+/* =========================================================
+   DATOS DEL CLIENTE
+   ========================================================= */
+
+.customer-data {
+  grid-area: customer;
+
+  background: #f7fafc;
+
+  border: 1px solid #dce7ef;
+
+  border-radius: 12px;
+
+  padding: 15px;
+
+  margin: 0 0 10px;
+
+  text-align: left;
+}
+
+.customer-data h3 {
+  margin: 0 0 10px;
+
+  font-size: 15px;
+
+  color: #173d5c;
+}
+
+.customer-data label {
+  display: block;
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  margin: 8px 0 5px;
+
+  color: #35536c;
+}
+
+.customer-data > input,
+.nit-box input {
+  width: 100%;
+
+  height: 40px;
+
+  border: 1px solid #cbdbe7;
+
+  border-radius: 7px;
+
+  padding: 0 10px;
+
+  outline: none;
+
+  background: white;
+}
+
+.customer-data > input:focus,
+.nit-box input:focus {
+  border-color: #087de2;
+
+  box-shadow: 0 0 0 2px #087de218;
+}
+
+
+/* CHECKBOX NIT */
+
+.nit-check {
+  display: flex !important;
+
+  align-items: center;
+
   gap: 8px;
-  margin: 16px 0;
+
+  cursor: pointer;
+
+  margin: 12px 0 5px !important;
+}
+
+.nit-check input {
+  width: 17px;
+
+  height: 17px;
+
+  accent-color: #087de2;
+}
+
+.nit-check span {
+  font-size: 12px;
+}
+
+.nit-box {
+  margin-top: 4px;
+}
+
+
+/* =========================================================
+   MÉTODOS DE PAGO
+   ========================================================= */
+
+.payment-options {
+  grid-area: options;
+
+  display: grid;
+
+  gap: 8px;
+
+  margin: 0 0 10px;
 }
 
 .payment-option {
@@ -1007,7 +1159,7 @@ footer {
 
   text-align: left;
 
-  padding: 12px;
+  padding: 11px;
 
   border: 1px solid #dce7ef;
 
@@ -1016,10 +1168,22 @@ footer {
   background: #f8fbfe;
 
   color: #163c61;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.payment-option:hover {
+  border-color: #087de2;
+
+  transform: translateY(-1px);
 }
 
 .payment-option.active {
   border: 2px solid #087de2;
+
   background: #eef7ff;
 }
 
@@ -1029,85 +1193,120 @@ footer {
 
 .payment-option small {
   display: block;
+
   color: #71839a;
+
   margin-top: 2px;
+
+  font-size: 11px;
 }
 
+
+/* =========================================================
+   INFORMACIÓN DEL PAGO
+   ========================================================= */
+
 .payment-info {
+  grid-area: info;
+
   background: #f4f8fb;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
-  padding: 14px;
+  padding: 15px;
 
-  margin: 10px 0;
+  margin: 0 0 10px;
 
   color: #35536c;
+
+  min-height: 150px;
 }
 
 .payment-info p {
   font-size: 13px;
+
   margin: 6px 0 0;
+
+  color: #71839a;
 }
 
-.qr-placeholder {
-  width: 190px;
-  height: 190px;
 
-  margin: 12px auto;
+/* =========================================================
+   QR PEQUEÑO
+   ========================================================= */
+
+.qr-box {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin: 8px auto;
+
+  padding: 4px;
+
+  width: 350px;
+
+  height: 350px;
 
   background: #fff;
 
-  border: 1px dashed #9db2c5;
-
   border-radius: 8px;
 
-  display: grid;
-  place-items: center;
-
-  color: #678096;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-.qr-placeholder div {
-  font-size: 100px;
+.qr-box img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+
+  border-radius: 4px;
 }
 
-.qr-placeholder small {
-  font-size: 11px;
-}
+
+/* =========================================================
+   TOTAL A PAGAR
+   ========================================================= */
 
 .payment-total {
+  grid-area: total;
+
   background: #e3f8ed;
 
   color: #087b49;
 
-  padding: 12px;
+  padding: 12px 15px;
 
-  border-radius: 8px;
+  border-radius: 9px;
 
   text-align: right;
 
   font-size: 17px;
 
-  margin: 12px 0;
+  margin: 5px 0 10px;
 }
 
-.modal-actions {
-  display: grid;
-  gap: 8px;
-}
 
-.secondary-btn {
+/* =========================================================
+   BOTÓN CONFIRMAR
+   ========================================================= */
+
+.payment-card > #confirmPayment {
+  grid-area: button;
+
   width: 100%;
-  height: 44px;
 
-  border-radius: 22px;
+  height: 46px;
 
-  background: #edf2f6;
+  margin-top: 0;
 
-  color: #21435f;
-
-  font-weight: bold;
+  border-radius: 24px;
 }
 
 
@@ -1117,6 +1316,7 @@ footer {
 
 .sales-card {
   width: 650px;
+
   max-width: 95vw;
 }
 
@@ -1191,96 +1391,6 @@ footer {
 
 .invoice-print {
   display: none;
-}
-
-
-/* =========================================================
-   DATOS DEL CLIENTE
-   ========================================================= */
-
-.customer-data {
-  background: #f7fafc;
-
-  border: 1px solid #dce7ef;
-
-  border-radius: 10px;
-
-  padding: 13px;
-
-  margin: 12px 0;
-
-  text-align: left;
-}
-
-.customer-data h3 {
-  margin: 0 0 10px;
-
-  font-size: 15px;
-
-  color: #173d5c;
-}
-
-.customer-data label {
-  display: block;
-
-  font-size: 12px;
-
-  font-weight: bold;
-
-  margin: 8px 0 5px;
-
-  color: #35536c;
-}
-
-.customer-data > input,
-.nit-box input {
-  width: 100%;
-
-  height: 40px;
-
-  border: 1px solid #cbdbe7;
-
-  border-radius: 7px;
-
-  padding: 0 10px;
-
-  outline: none;
-
-  background: white;
-}
-
-.customer-data > input:focus,
-.nit-box input:focus {
-  border-color: #087de2;
-
-  box-shadow: 0 0 0 2px #087de218;
-}
-
-.nit-check {
-  display: flex !important;
-
-  align-items: center;
-
-  gap: 8px;
-
-  cursor: pointer;
-
-  margin: 12px 0 5px !important;
-}
-
-.nit-check input {
-  width: 17px;
-  height: 17px;
-
-  accent-color: #087de2;
-}
-
-.nit-check span {
-  font-size: 12px;
-}
-
-.nit-box {
-  margin-top: 4px;
 }
 
 
@@ -1386,6 +1496,25 @@ footer {
   .search {
     width: 270px;
   }
+
+
+  /* PAGO EN TABLET */
+
+  .payment-card {
+    width: 90vw;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 0 15px;
+
+    padding: 22px;
+  }
+
+  .qr-box {
+    width: 85px;
+
+    height: 85px;
+  }
 }
 
 
@@ -1474,6 +1603,52 @@ footer {
   .cart-panel {
     width: 360px;
   }
+
+
+  /* =======================================================
+     PAGO EN CELULAR
+     ======================================================= */
+
+  .payment-card {
+    width: 95vw;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+      "title"
+      "description"
+      "customer"
+      "options"
+      "info"
+      "total"
+      "button";
+
+    gap: 0;
+
+    padding: 20px;
+  }
+
+  .payment-card > h2 {
+    font-size: 20px;
+  }
+
+  .customer-data,
+  .payment-options,
+  .payment-info {
+    width: 100%;
+  }
+
+  .qr-box {
+    width: 85px;
+
+    height: 85px;
+  }
 }
 
 
@@ -1521,5 +1696,44 @@ footer {
 
   .search {
     width: calc(100vw - 115px);
+  }
+
+
+  /* PAGO EN CELULARES PEQUEÑOS */
+
+  .payment-card {
+    width: 96vw;
+
+    padding: 17px;
+  }
+
+  .payment-card > h2 {
+    font-size: 19px;
+  }
+
+  .payment-card > p {
+    font-size: 12px;
+  }
+
+  .customer-data {
+    padding: 12px;
+  }
+
+  .payment-option {
+    padding: 10px;
+  }
+
+  .payment-info {
+    padding: 12px;
+  }
+
+  .qr-box {
+    width: 80px;
+
+    height: 80px;
+  }
+
+  .payment-total {
+    font-size: 15px;
   }
 }
