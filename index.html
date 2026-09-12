@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empresa Hogar - Sistema de Ventas</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="loginPage" class="login-page">
+  <div class="login-bg"></div>
+  <div class="login-card">
+    <div class="brand-mark">🏠</div>
+    <h1>Empresa <span>Hogar</span></h1>
+    <p class="tagline">Tu hogar, nuestra prioridad</p>
+    <p class="welcome">Inicia sesión para continuar</p>
+
+    <form id="loginForm">
+      <label>👤 Usuario</label>
+      <div class="input-wrap">
+        <span>👤</span>
+        <input id="usuario" type="text" placeholder="Ingresa tu usuario" autocomplete="username" required>
+      </div>
+
+      <label>🔒 Contraseña</label>
+      <div class="input-wrap">
+        <span>🔒</span>
+        <input id="password" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" required>
+        <button type="button" id="togglePassword">👁️</button>
+      </div>
+
+      <button class="primary-btn" type="submit">↪ &nbsp; Iniciar sesión</button>
+      <p id="loginMessage" class="login-message"></p>
+    </form>
+
+    <small class="login-foot">Sistema de ventas · Empresa Hogar</small>
+  </div>
+</section>
+
+<section id="appPage" class="app hidden">
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-small">🏠</div>
+      <div><b>Empresa <em>Hogar</em></b><small>Sistema de ventas</small></div>
+    </div>
+
+    <nav>
+      <button class="menu-item active" data-category="todos">🏠 <span>Inicio</span></button>
+      <button class="menu-item" data-category="bebidas">🥤 <span>Bebidas</span></button>
+      <button class="menu-item" data-category="harinas">🌾 <span>Harinas y otros</span></button>
+      <button class="menu-item" data-category="verduras">🥬 <span>Verduras</span></button>
+      <button class="menu-item" data-category="frutas">🍎 <span>Frutas</span></button>
+      <button id="menuCart" class="menu-item">🛒 <span>Mi carrito</span><b id="sideCount" class="badge">0</b></button>
+      <button id="menuSales" class="menu-item">📋 <span>Registro de ventas</span></button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="side-user"><div>👤</div><span><b id="sideUser">Limber</b><small>Sesión activa</small></span></div>
+      <button id="logoutBtn" class="logout">🚪 &nbsp; Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="header">
+      <button id="mobileMenu" class="hamburger">☰</button>
+      <div class="title"><h2 id="pageTitle">Inicio</h2><p>Encuentra todo lo que necesitas para tu hogar</p></div>
+      <div class="header-actions">
+        <div class="search"><span>🔎</span><input id="search" placeholder="Buscar productos..."></div>
+        <div class="header-user"><div>👤</div><span><b id="headerUser">Limber</b><small>Administrador</small></span></div>
+        <button id="cartButton" class="cart-btn">🛒 <b id="headCount">0</b></button>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="hero">
+        <div>
+          <span>🛍️ COMPRA FÁCIL Y RÁPIDO</span>
+          <h1>Bienvenido a<br><strong>Empresa Hogar</strong></h1>
+          <p>Productos frescos, de calidad y al mejor precio.</p>
+          <button id="shopNow" class="hero-btn">🛒 Comprar ahora</button>
+        </div>
+        <div class="hero-art">🛒<br>🥦🍎🥖</div>
+      </section>
+
+      <section>
+        <div class="section-head"><div><h2>Categorías</h2><p>Explora nuestros productos</p></div></div>
+        <div class="categories">
+          <button class="cat blue" data-category="bebidas"><i>🥤</i><span><b>Bebidas</b><small>4 productos</small></span>→</button>
+          <button class="cat yellow" data-category="harinas"><i>🌾</i><span><b>Harinas y otros</b><small>4 productos</small></span>→</button>
+          <button class="cat green" data-category="verduras"><i>🥬</i><span><b>Verduras</b><small>4 productos</small></span>→</button>
+          <button class="cat red" data-category="frutas"><i>🍎</i><span><b>Frutas</b><small>4 productos</small></span>→</button>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head"><div><h2 id="productsTitle">Todos los productos</h2><p id="productsSubtitle">Productos disponibles</p></div></div>
+        <div id="productsGrid" class="products"></div>
+        <div id="noProducts" class="empty hidden">🔎<h3>No encontramos productos</h3><p>Intenta buscar con otro nombre.</p></div>
+      </section>
+    </div>
+    <footer>© 2026 Empresa Hogar &nbsp; | &nbsp; Tu hogar, nuestra prioridad 🏠</footer>
+  </main>
+</section>
+
+<div id="overlay" class="overlay hidden"></div>
+<aside id="cartPanel" class="cart-panel">
+  <div class="cart-head"><div><h2>🛒 Mi carrito (<span id="cartCountTitle">0</span>)</h2><small>Productos seleccionados</small></div><button id="closeCart">×</button></div>
+  <div id="cartItems"></div>
+  <div id="emptyCart" class="cart-empty">🛒<h3>Tu carrito está vacío</h3><p>Agrega productos para comenzar tu compra.</p><button id="continue">Ver productos</button></div>
+  <div id="summary" class="summary hidden">
+    <div><span>Subtotal</span><b id="subtotal">Bs. 0.00</b></div>
+    <div><span>Envío</span><b>Bs. 0.00</b></div>
+    <hr><div class="total"><span>Total</span><b id="total">Bs. 0.00</b></div>
+    <button id="checkout" class="buy">🛒 Realizar compra</button>
+  </div>
+</aside>
+
+<div id="paymentModal" class="modal hidden">
+  <div class="modal-card payment-card">
+    <button id="closePayment" class="modal-x">×</button>
+    <h2>💳 Forma de pago</h2>
+    <p>Selecciona cómo deseas pagar tu compra.</p>
+
+    <div class="customer-data">
+      <h3>👤 Datos del cliente</h3>
+      <label for="customerName">Nombre del cliente</label>
+      <input id="customerName" type="text" placeholder="Ingresa el nombre del cliente" autocomplete="name" required>
+
+      <label class="nit-check">
+        <input id="wantNit" type="checkbox">
+        <span>Desea NIT en su factura</span>
+      </label>
+
+      <div id="nitBox" class="nit-box hidden">
+        <label for="customerNit">NIT</label>
+        <input id="customerNit" type="text" placeholder="Ingresa el NIT">
+      </div>
+    </div>
+
+    <div class="payment-options">
+      <button class="payment-option active" data-payment="Efectivo">💵 <span><b>Efectivo</b><small>Pago en caja</small></span></button>
+      <button class="payment-option" data-payment="QR">📱 <span><b>Pago por QR</b><small>Escanea el código</small></span></button>
+      <button class="payment-option" data-payment="Tarjeta de débito">💳 <span><b>Tarjeta de débito</b><small>Pago con tarjeta</small></span></button>
+    </div>
+
+    <div id="cashInfo" class="payment-info">
+      <b>💵 Pago en efectivo</b>
+      <p>Confirma la compra y registra el pago en efectivo.</p>
+    </div>
+
+    <div id="qrInfo" class="payment-info hidden">
+      <b>📱 Escanea nuestro QR</b>
+      <div class="qr-placeholder" id="qrBox">
+        <div>▦</div>
+        <small>Aquí aparecerá tu QR</small>
+      </div>
+      <p>Después de subir tu imagen QR, reemplazaremos este espacio por tu código.</p>
+    </div>
+
+    <div id="cardInfo" class="payment-info hidden">
+      <b>💳 Pago con tarjeta de débito</b>
+      <p>Registra la compra como pagada con tarjeta de débito.</p>
+    </div>
+
+    <div class="payment-total">Total a pagar: <strong id="paymentTotal">Bs. 0.00</strong></div>
+    <button id="confirmPayment" class="primary-btn">✓ Confirmar pago</button>
+  </div>
+</div>
+
+<div id="successModal" class="modal hidden">
+  <div class="modal-card">
+    <button id="closeSuccess" class="modal-x">×</button>
+    <div class="success">✓</div>
+    <h2>¡Venta registrada!</h2>
+    <p id="saleMessage">La compra fue registrada correctamente.</p>
+    <div class="purchase">
+      <span>N.º de venta</span><b id="saleNumber">000001</b>
+      <span>Cliente</span><b id="saleCustomer">-</b>
+      <span>NIT</span><b id="saleNit">Sin NIT</b>
+      <span>Forma de pago</span><b id="salePayment">Efectivo</b>
+      <span>Total de productos</span><b id="purchaseItems">0</b>
+      <span>Total pagado</span><b id="purchaseTotal">Bs. 0.00</b>
+    </div>
+    <div class="modal-actions">
+      <button id="pdfBtn" class="primary-btn">📄 Exportar factura / PDF</button>
+      <button id="finish" class="secondary-btn">✓ Finalizar</button>
+    </div>
+  </div>
+</div>
+
+<div id="salesModal" class="modal hidden">
+  <div class="modal-card sales-card">
+    <button id="closeSales" class="modal-x">×</button>
+    <h2>📋 Registro de ventas</h2>
+    <p>Ventas realizadas desde este navegador.</p>
+    <div id="salesList" class="sales-list"></div>
+  </div>
+</div>
+
+<div id="invoicePrint" class="invoice-print"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
